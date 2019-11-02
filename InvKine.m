@@ -1,30 +1,31 @@
-addpath(genpath('rvctools'));
-
-% Lets define the DH parmetes
+clc
+clear all
+% Inputing the number of links
 Number_of_Links = input(' Enter the Number of Links in the Robot - ');
 disp(' ');
 Type_of_Links   = input(' Enter Type of Links Revolute or Prismatic, All would be same!! enter 1 or 2 - ');
-disp(' ');
+disp(' ');% Defining type of link
 disp(' What type of detail you want to enter DH parameter or links definations')
 disp(' ');
 XX = input(' enter 1 for DH or 2 for Link Defination - ');
-disp(' ');
+disp(' ');% entering defination to undertand the robot
 if XX==1
+    % Defining the DH Parameters for the robot
 disp(' Now enter the prompted values in ascending order from link i to n')
 for i = 1:Number_of_Links
     a(i,1)     = input(' Link Length - ');
     d(i,1)     = input(' Distance d - ');
     theta(i,1) = input(' Angle theta in radians - ');
     alpha(i,1) = input(' Angle alpha in radians - ');
-    disp(' ');
+    disp(' '); 
 end
 disp(' ');
 disp(' Entered DH Parametes are - ');
 disp(' ');
 disp(' a  d  theta  alpha');
 dh = [theta d a alpha]
-% Making links using RVC Tools
-else
+
+else % Describing the robot using minimal data and finding the DH parameters
     disp(' Now enter the prompted values in ascending order from base to end effector')
     for i = 1:Number_of_Links
     linkl(i,1)     = input(' Length of link - ');
@@ -40,11 +41,12 @@ else
     dh = [theta' zdist linkl zangle]
     disp(' ');
 end
-if Type_of_Links==1
+% Using RVCtools defining the links 
+if Type_of_Links==1 % For all Revolute
 for k = 1:Number_of_Links
     L{k} = Link('d',dh(k,2), 'a', dh(k,3), 'alpha', dh(k,4));
 end
-else
+else % For all prismatic as they require some joint limits 
     disp(' As the joints you specified are prismatic you need to specify the limits of the joints - ')
     for m = 1:Number_of_Links
         limitlow(m)   = input(' Lower limit for the joint - ');
@@ -57,6 +59,7 @@ else
     L{k} = Link('theta',dh(k,1), 'a', dh(k,3), 'alpha', dh(k,4));
 end
 end
+% Making links using RVC Tools
 for b = 1:Number_of_Links
     R = SerialLink([L{b}]);
 end
@@ -73,7 +76,7 @@ T = [ cos(phi) -sin(phi) 0 Px;
 
 disp(' ');
 disp(' The Joint parameters from given end effector pose are - ')
-INVS = R.ikunc(T)
+INVS = R.ikunc(T) % using the unconstrained inverse kinematic function finding the inverse for the robot
 for j = 1:Number_of_Links
     q(j)= INVS(1,j);
 end

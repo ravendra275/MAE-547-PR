@@ -57,9 +57,11 @@ else
     L{k} = Link('theta',dh(k,1), 'a', dh(k,3), 'alpha', dh(k,4));
 end
 end
-
-
-R = SerialLink([L{1} L{2} L{3}])
+for b = 1:Number_of_Links
+    R = SerialLink([L{b}]);
+end
+R
+%R = SerialLink([L{1} L{2} L{3}])
 phi = input(' Input total angle phi till the end effector - ');
 Px  = input(' Input Position in wrt to X axis - ');
 Py  = input(' Input Position in wrt to Y axis - ');

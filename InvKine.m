@@ -51,23 +51,27 @@ else % For all prismatic as they require some joint limits
     for m = 1:Number_of_Links
         limitlow(m)   = input(' Lower limit for the joint - ');
         limitupper(m) = input(' Upper limit for the joint - ');
+        disp(' ')
     end
     for n = 1:Number_of_Links
         L{m}.qlim = [limitlow(m), limitupper(m)];
     end
     for k = 1:Number_of_Links
     L{k} = Link('theta',dh(k,1), 'a', dh(k,3), 'alpha', dh(k,4));
-end
+    end
 end
 % Making links using RVC Tools
-Link_array=[]
+% Link_array=[]
 for b = 1:Number_of_Links
-    %R = SerialLink([L{b}]);
-    Link_array=[Link_array,L{b}];
+    % R = SerialLink([L{b}]);
+    % Link_array=[Link_array,L{b}];
+    X(b) = L{b};
 end
-%R
-R = SerialLink([L{b}]);
-%R = SerialLink([L{1} L{2} L{3}])
+n = 1:Number_of_Links;
+m =[X(n)];
+R = SerialLink(m);
+% R = SerialLink(arrayofA(Number_of_Links)));
+% R = SerialLink([L{1} L{2} L{3}])
 phi = input(' Input total angle phi till the end effector - ');
 Px  = input(' Input Position in wrt to X axis - ');
 Py  = input(' Input Position in wrt to Y axis - ');

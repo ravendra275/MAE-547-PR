@@ -60,10 +60,13 @@ else % For all prismatic as they require some joint limits
 end
 end
 % Making links using RVC Tools
+Link_array=[]
 for b = 1:Number_of_Links
-    R = SerialLink([L{b}]);
+    %R = SerialLink([L{b}]);
+    Link_array=[Link_array,L{b}];
 end
-R
+%R
+R = SerialLink([L{b}]);
 %R = SerialLink([L{1} L{2} L{3}])
 phi = input(' Input total angle phi till the end effector - ');
 Px  = input(' Input Position in wrt to X axis - ');

@@ -68,10 +68,8 @@ for i=1:x
         alpha(i)= input('Enter new alpha ');
     end 
 end
-lno=[1:x];
-DH= [lno; q; d; a; alpha]';
- DH=array2table(DH,...
-     'VariableNames',{'Link no.','q','d','a','alpha'})
+
+DH= [q; d; a; alpha]'
 
  for i = 1:x    
     T{i} = [cos(q(i)) -sin(q(i))*cos(alpha(i)) sin(q(i))*sin(alpha(i)) a(i)*cos(q(i));
@@ -117,3 +115,84 @@ syms Jo [3 x]
  end
  J=[Jp;Jo];
  J=simplify(J)
+%  Number_of_Links = x;
+%  dh = DH
+% for i = 1:Number_of_Links
+%  if por(i)=='r' % For all Revolute
+% for k = 1:Number_of_Links
+%     L{k} = Link('d',dh(k,2), 'a', dh(k,3), 'alpha', dh(k,4));
+% end
+% else % For all prismatic as they require some joint limits 
+%     disp(' As the joints you specified are prismatic you need to specify the limits of the joints - ')
+%     for m = 1:Number_of_Links
+%         limitlow(m)   = input(' Lower limit for the joint - ');
+%         limitupper(m) = input(' Upper limit for the joint - ');
+%         disp(' ')
+%     end
+%     for n = 1:Number_of_Links
+%         L{m}.qlim = [limitlow(m), limitupper(m)];
+%     end
+%     for k = 1:Number_of_Links
+%     L{k} = Link('theta',dh(k,1), 'a', dh(k,3), 'alpha', dh(k,4));
+%     end
+%  end
+%  end
+% % Making links using RVC Tools
+% % Link_array=[]
+% for b = 1:Number_of_Links
+%     % R = SerialLink([L{b}]);
+%     % Link_array=[Link_array,L{b}];
+%     X(b) = L{b};
+% end
+% n = 1:Number_of_Links;
+% m =[X(n)];
+% R = SerialLink(m);
+[m,n]=size(J);
+%Ja=[];
+m1=0;
+n1=0;
+
+%    syms z [n 1];
+        z=zeros(1,n);
+
+for i=1:m
+    if J(i,:)==z
+        %Ja(i,:)=J(i,:);
+        m1=m1+1;
+    end
+end
+
+for i=1:n
+    if J(:,i)==z
+        %Ja(:,i)=J(:,i);
+        n1=n1+1;
+    end
+end
+syms Ja [m-m1 n-n1]
+%Ja=zeros(m-m1,n-n1);
+%z1=zeros(1,n-n1);
+syms z1 [1 n-n1];
+        z=zeros(1,n-n1);
+
+[f,g]=size(Ja);
+j=1;
+for i=1:f
+    
+    if abs(J(i,:))~=z1
+        fprintf('hi')
+        Ja(j,:)=J(i,:);
+        j=j+1;
+        %n1=n1+1;
+    end
+end 
+syms z1 [1 n-n1];
+
+z=zeros(m-m1,1);
+for i=1:g
+    if J(:,i)~=z
+        Ja(:,i)=J(:,i);
+        fprintf('Hi');
+        %m1=m1+1;
+    end
+end
+

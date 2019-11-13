@@ -148,4 +148,6 @@ m =[X(n)];
 R = SerialLink(m);
 disp(' Given these inputs, the transformation matrix is as follows')
 T = R.fkine(q) % using the unconstrained inverse kinematic function finding the inverse for the robot
+plot(R, q)
+teach(R)
 

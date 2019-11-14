@@ -148,4 +148,3 @@ while i<n+1
     end
     i=i+1;
 end
-det(J'*J)

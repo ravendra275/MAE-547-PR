@@ -115,38 +115,7 @@ syms Jo [3 x]
  end
  J=[Jp;Jo];
  J=simplify(J)
-%  Number_of_Links = x;
-%  dh = DH
-% for i = 1:Number_of_Links
-%  if por(i)=='r' % For all Revolute
-% for k = 1:Number_of_Links
-%     L{k} = Link('d',dh(k,2), 'a', dh(k,3), 'alpha', dh(k,4));
-% end
-% else % For all prismatic as they require some joint limits 
-%     disp(' As the joints you specified are prismatic you need to specify the limits of the joints - ')
-%     for m = 1:Number_of_Links
-%         limitlow(m)   = input(' Lower limit for the joint - ');
-%         limitupper(m) = input(' Upper limit for the joint - ');
-%         disp(' ')
-%     end
-%     for n = 1:Number_of_Links
-%         L{m}.qlim = [limitlow(m), limitupper(m)];
-%     end
-%     for k = 1:Number_of_Links
-%     L{k} = Link('theta',dh(k,1), 'a', dh(k,3), 'alpha', dh(k,4));
-%     end
-%  end
-%  end
-% % Making links using RVC Tools
-% % Link_array=[]
-% for b = 1:Number_of_Links
-%     % R = SerialLink([L{b}]);
-%     % Link_array=[Link_array,L{b}];
-%     X(b) = L{b};
-% end
-% n = 1:Number_of_Links;
-% m =[X(n)];
-% R = SerialLink(m);
+
 [m,n]=size(J);
 %Ja=[];
 m1=0;

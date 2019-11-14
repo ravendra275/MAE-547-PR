@@ -68,10 +68,12 @@ for k = 1:Number_of_Links
     L{k} = Link('d',DH(k,2), 'a', DH(k,3), 'alpha', DH(k,4));
  else
     disp(' As entered link is prismatic please enter its joint limits ')
+    disp(' ')
     limitlow(k)   = input(' Lower limit for the joint - ');
     limitupper(k) = input(' Upper limit for the joint - ');
     L{k} = Link('theta',DH(k,1), 'a', DH(k,3), 'alpha', DH(k,4));
     L{k}.qlim = [limitlow(k), limitupper(k)];
+    disp(' ')
  end
 end
 for b = 1:Number_of_Links

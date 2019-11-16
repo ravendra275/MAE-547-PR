@@ -10,7 +10,7 @@ L3.qlim = [0, 0.4];
 L4 = Link('d', dh(4,2), 'a', dh(4,3), 'alpha', dh(4,4));
 
 R = SerialLink( [L1 L2 L3 L4])
-q = [pi/6 -pi/2 .2 pi/3];
+q = [pi/6 -pi/2 .2 pi/3]';
 W = [-4 4 -4 4 -4 4];
 
-R.plot3d(q,'workspace',W)
+R.plot3d(R,q, 'workspace' , W)

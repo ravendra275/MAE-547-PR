@@ -32,5 +32,5 @@ xM = (dh(1,3))*cos(T1)+(dh(2,3))*cos(T1+T2)+2*cos(T1+T2+T3);
 yM = (dh(1,3))*sin(T1)+(dh(2,3))*sin(T1+T2)+2*sin(T1+T2+T3);
 zM = zeros(1,length(xM(:)));
 
-% figure(2)
-% plot3(xM(:),yM(:),zM(:),'--');
+ figure(2)
+ plot3(xM(:),yM(:),zM(:),'--');

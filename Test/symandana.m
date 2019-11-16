@@ -157,9 +157,21 @@ if xor(strcmp(euler,'zyz'),strcmp(euler,'zyx')) == 0
     fprintf('Invalid input. Press p for prismatic joint, Press r for revolute joint\n');
     %exit;
 elseif (strcmp(euler,'zyz'))== 1
-    fprintf('zyz');
-else
-    
-        
-end
+    fprintf('Now we will calculate zyz transformation matrix/n');
 
+    smallphi = input('Enter the z angle ');
+    theta = input('Enter the y angle ');
+    %psi = input('Enter the z1 angle');
+    TJ= [0 -sin(smallphi) cos(smallphi)*sin(theta);...
+        0 cos(smallphi) sin(smallphi)*sin(theta);...
+        1 0 cos(theta)]
+elseif (strcmp(euler,'zyx'))== 1
+    fprintf('Now we will calculate zyx transformation matrix/n');
+    smallphi = input('Enter the z angle ');
+    theta = input('Enter the y angle ');
+    TJ= [0 -sin(smallphi) cos(smallphi)*cos(theta);...
+        0 cos(smallphi) sin(smallphi)*cos(theta);...
+        1 0 -sin(theta)]
+end
+Ta=[eye(3) zeros(3,3);zeros(3,3) TJ]
+Ja=inv(Ta)*J

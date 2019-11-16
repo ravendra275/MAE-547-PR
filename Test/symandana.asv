@@ -152,14 +152,9 @@ end
 fprintf('Enter the euler angle pose- zyz or zyx ');    
 fprintf('Press zyz for zyz end pose,\nPress zyx for zyx end pose\n');
  
-euler=input(' zyz end pose or zyx end pose: ','s');
-if xor(strcmp(euler,'zyz'),strcmp(euler,'zyx')) == 0
+euler=input(' prismatic or revolute: ','s');
+if xor(strcmp(por(i),'r'),strcmp(por(i),'p')) == 0
     fprintf('Invalid input. Press p for prismatic joint, Press r for revolute joint\n');
     %exit;
-elseif (strcmp(euler,'zyz'))== 1
-    fprintf('zyz');
-else
-    
-        
 end
 

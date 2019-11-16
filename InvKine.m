@@ -25,21 +25,24 @@ for i = 1:Number_of_Links
         a(i,1)     = input(' Link Length - ');
         d(i,1)     = input(' Distance d - ');
         alpha(i,1) = input(' Angle alpha in radians - ');
-        theta(i,1) = input(' Angle theta in radians - ');
         disp(' ')
     else
         disp(' For Defined Prismatic Joint ')
         a(i,1)     = input(' Link Length - ');
-        d(i,1)     = input(' Distance d - ');
         alpha(i,1) = input(' Angle alpha in radians - ');
         theta(i,1) = input(' Angle theta in radians - ');
         disp(' ')
+    end
+    if por(i)=='r'
+        DH(i,:) = [0 d(i,1) a(i,1) alpha(i,1)];
+    else
+        DH(i,:) = [theta(i,1) 0 a(i,1) alpha(i,1)];
     end
 end
 disp(' ')
 disp(' Below are the inputed DH Parameters ')
 disp(' in order of theta d a alpha ')
-DH = [theta d a alpha]
+disp(DH)
 else
 for i = 1:Number_of_Links
     if por(i)=='r'

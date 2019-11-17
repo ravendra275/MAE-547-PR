@@ -83,31 +83,32 @@ n = 1:Number_of_Links;
 m =[X(n)];
 R = SerialLink(m);
 disp(' ')
-T = input(' Time of the inverse diffrential ');
+T = input(' Time of the inverse differential ');
 disp(' ')
-
-Px  = input(' Input X position as Time Function - ')
-Py  = input(' Input Y position as Time Function - ')
-Pz  = input(' Input Z position as Time Function - ')
-Phi = input(' Input Total Joint angle as Time Funtion - ')
-
+syms t;
+Px  = input(' Input X position as Time Function - ');
+Py  = input(' Input Y position as Time Function - ');
+Pz  = input(' Input Z position as Time Function - ');
+Phi = input(' Input Total Joint angle as Time Funtion - ');
+q_in = input(' Initial Condition of joint variables in Matrix Format - ')
 disp(' ')
-t = 1:0.01:T;
+t = 1:0.1:T;
 dt = 1e-8;
-pd = @(t) [Px; Py; Pz];
+pd = matlabFunction([Px; Py; Pz]);
 pd_dot = (pd(t + dt) - pd(t)) / dt ;
-pd = [Px; Py; Pz];
-phid = @(t) [Phi];
-phid_dot = (phid(t + dt) - phid(t)) / dt
-phid = [Phi];
+pd = pd(t);
+phid = matlabFunction([Phi]);
+phid_dot = (phid(t + dt) - phid(t)) / dt ;
+phid = phid(t);
+q= zeros(Number_of_Links,length(t));
+q(:,1) = q_in;
 
-
-% for i = 1:length(t)
-%     xe(:,i)= fwd_kin(L1, L2, D4, q(:,i));% Forward kinematics function attached with published file
-%     Ja = an_Ja(L1, L2, q(:,i)); % inverse Jacobian Function attached with the published file
-%     e(:,i)=[pd(:,i); phid(i)] - xe(:,i);
-%     xd_dot=[pd_dot(:,i); phid_dot];
-%     qdot = inv(Ja)*(xd_dot+K*e(:,i));
-%     q(:,i+1)=q(:,i)+qdot*0.01;
-% end
-% max(e(:,length(t)))
+for i = 1:length(t)
+    xe(:,i)= fwd_kin(a(:,i), d(:,i), q(:,i));% Forward kinematics function attached with published file
+    Ja = an_Ja(L1, L2, q(:,i)); % inverse Jacobian Function attached with the published file
+    e(:,i)=[pd(:,i); phid(i)] - xe(:,i);
+    xd_dot=[pd_dot(:,i); phid_dot];
+    qdot = inv(Ja)*(xd_dot+K*e(:,i));
+    q(:,i+1)=q(:,i)+qdot*0.01;
+end
+max(e(:,length(t)))

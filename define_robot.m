@@ -1,11 +1,8 @@
-
-clear all
 % Inputing the number of links
 %{
 Number_of_Joints = input(' Enter the Number of Links in the Robot - ');
 disp(' ');
 i=1;
-
 %The for loop has been replaced by a while loop
 while(i<=Number_of_Joints)
     if i==1
@@ -49,7 +46,6 @@ disp(' ')
 disp(' Below are the inputed DH Parameters ')
 disp(' in order of theta d a alpha ')
 disp(DH)
-
 else
 for i = 1:Number_of_Joints
     if por(i)=='r'
@@ -72,13 +68,9 @@ for i = 1:Number_of_Joints
     end
 end
 end
-
-
     
-
 %% Making links using RVC Tools
 % Link_array=[]
-
 for k = 1:Number_of_Joints
  if por(k)=='r'
     L{k} = Link('d',DH(k,2), 'a', DH(k,3), 'alpha', DH(k,4));
@@ -95,38 +87,8 @@ end
 for b = 1:Number_of_Joints
     X(b) = L{b};
 end
-
 n = 1:Number_of_Joints;
 m =[X(n)];
-
 %The following is the robot object
 R = SerialLink(m);
 %}
-
-%% Take the generalized joint angles as input
-disp('One by one, input the joint actuation (angles in degrees for revolute joints and lengths in metres for prismatic joints)')
-
-q=[];%Joint angles
-for q_count=1:Number_of_Joints
-    if(por(i)=='p')
-        q(i)=input('Input the joint actuation (angles in degrees for revolute joints and lengths in metres for prismatic joints)')
-    else
-        q(i)=pi/180*input('Input the joint actuation (angles in degrees for revolute joints and lengths in metres for prismatic joints)')
-    end
-end
-
-%% Calculate the Transformation Matrix and plot the robot
-disp(' Given these inputs, the transformation matrix is as follows')
-
-T = R.fkine(q) % using the unconstrained inverse kinematic function finding the inverse for the robot
-
-plot_or_not=input('Do you want to plot the robot configuration? (y or n)','s')
-w=[-10 10 -10 10 -10 10];
-if(plot_or_not=='y' || plot_or_not=='y')
-    figure()
-    plot(R,q,'workspace',w)
-    play_or_not=input('Do you want to play with the robot? (y or n)','s')
-    if(play_or_not=='y')
-        R.teach()
-    end
-end

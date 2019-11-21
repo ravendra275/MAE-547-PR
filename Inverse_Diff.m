@@ -143,7 +143,7 @@ for i = 1:Number_of_Links
 q_dot = pinv(J)*Ve;
 
 
- q = q0 + q_dot*t
+ q = q0 + q_dot*t;
 
 disp(' ')
 disp(' The Joint Variables at the Given Time are - ')

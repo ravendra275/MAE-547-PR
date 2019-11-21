@@ -1,5 +1,5 @@
 clc
-
+clear all
 % Inputing the number of links
 Number_of_Links = input(' Enter the Number of Links in the Robot - ');
 disp(' ');
@@ -91,31 +91,31 @@ alpha = DH(:,4);
 a = DH(:,3);
 d = DH(:,2);
 disp(' ')
-fprintf('Enter the euler angle pose- zyz or zyx ');    
-fprintf('Press zyz for zyz end pose,\nPress zyx for zyx end pose\n');
- 
-euler=input(' zyz end pose or zyx end pose: ','s');
-if xor(strcmp(euler,'zyz'),strcmp(euler,'zyx')) == 0
-    fprintf('Invalid input. Press p for prismatic joint, Press r for revolute joint\n');
-    %exit;
-elseif (strcmp(euler,'zyz'))== 1
-    fprintf('Now we will calculate zyz transformation matrix/n');
-
-    smallphi = input('Enter the z angle ');
-    theta = input('Enter the y angle ');
-    %psi = input('Enter the z1 angle');
-    TJ= [0 -sin(smallphi) cos(smallphi)*sin(theta);...
-        0 cos(smallphi) sin(smallphi)*sin(theta);...
-        1 0 cos(theta)]
-elseif (strcmp(euler,'zyx'))== 1
-    fprintf('Now we will calculate zyx transformation matrix/n');
-    smallphi = input('Enter the z angle ');
-    theta = input('Enter the y angle ');
-    TJ= [0 -sin(smallphi) cos(smallphi)*cos(theta);...
-        0 cos(smallphi) sin(smallphi)*cos(theta);...
-        1 0 -sin(theta)]
-end
-Ta=[eye(3) zeros(3,3);zeros(3,3) TJ]
+% fprintf('Enter the euler angle pose- zyz or zyx ');    
+% fprintf('Press zyz for zyz end pose,\nPress zyx for zyx end pose\n');
+%  
+% euler=input(' zyz end pose or zyx end pose: ','s');
+% if xor(strcmp(euler,'zyz'),strcmp(euler,'zyx')) == 0
+%     fprintf('Invalid input. Press p for prismatic joint, Press r for revolute joint\n');
+%     %exit;
+% elseif (strcmp(euler,'zyz'))== 1
+%     fprintf('Now we will calculate zyz transformation matrix/n');
+% 
+%     smallphi = input('Enter the z angle ');
+%     theta = input('Enter the y angle ');
+%     %psi = input('Enter the z1 angle');
+%     TJ= [0 -sin(smallphi) cos(smallphi)*sin(theta);...
+%         0 cos(smallphi) sin(smallphi)*sin(theta);...
+%         1 0 cos(theta)]
+% elseif (strcmp(euler,'zyx'))== 1
+%     fprintf('Now we will calculate zyx transformation matrix/n');
+%     smallphi = input('Enter the z angle ');
+%     theta = input('Enter the y angle ');
+%     TJ= [0 -sin(smallphi) cos(smallphi)*cos(theta);...
+%         0 cos(smallphi) sin(smallphi)*cos(theta);...
+%         1 0 -sin(theta)]
+% end
+% Ta=[eye(3) zeros(3,3);zeros(3,3) TJ]
 
 disp(' ')
 T = input(' Time of the inverse differential ');
@@ -124,7 +124,9 @@ syms t;
 Px  = input(' Input X position as Time Function - ');
 Py  = input(' Input Y position as Time Function - ');
 Pz  = input(' Input Z position as Time Function - ');
-Phi = input(' Input Total Joint angle as Time Funtion - ');
+Wx = input(' Input X angle rate as Time Funtion - ');
+Wy = input(' Input Y angle rate as Time Funtion - ');
+Wz = input(' Input Z angle rate as Time Funtion - ');
 q_in = input(' Initial Condition of joint variables in Matrix Format - ')
 disp(' ')
 t = 1:0.1:T;
@@ -132,20 +134,24 @@ dt = 1e-8;
 pd = matlabFunction([Px; Py; Pz]);
 pd_dot = (pd(t + dt) - pd(t)) / dt ;
 pd = pd(t);
-phid = matlabFunction([Phi]);
+phid = matlabFunction([Wx;Wy;Wz]);
 phid_dot = (phid(t + dt) - phid(t)) / dt ;
 phid = phid(t);
 q= zeros(Number_of_Links,length(t));
 q(:,1) = q_in;
-K = eye(4);
+K = 3*eye(6);
     
 for i = 1:length(t)
-    T = R.fkine(q(:,i)');
-    xe(:,i)= T(:,4);
-    J = R.jacob0(q(:,i));
-    Ja = inv(Ta)*J;
-    e(:,i)=[pd(:,i); phid(i)] - xe(:,i);
+    Tr = R.fkine(q(:,i)');
+    RPY = tr2rpy(Tr);
+    xe(:,i)= [Tr(1:3,4);RPY'];
+    Ja = R.jacob0(q(:,i),'rpy',RPY);
+    e(:,i)=[pd(:,i); phid(:,i)] - xe(:,i);
     xd_dot=[pd_dot(:,i); phid_dot(:,i)];
-    qdot = pinv(Ja(1:4,:))*(xd_dot+K*e(:,i));
+    qdot = pinv(Ja)*(xd_dot+K*e(:,i));
     q(:,i+1)=q(:,i)+qdot*0.01;
 end
+
+Q=q(1:Number_of_Links,end);% Value of Joint Variables at 2.5 seconds
+fprintf("Value of Joint Variables at Time");disp(T)
+Q'

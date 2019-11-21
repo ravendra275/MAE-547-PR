@@ -122,7 +122,7 @@ syms Jo [3 x]
      end
  end
 J=[Jp;Jo];
-J=simplify(J)
+J=simplify(J);
 [m,n]=size(J);
 
 [m,n]=size(J);
@@ -175,3 +175,6 @@ elseif (strcmp(euler,'zyx'))== 1
 end
 Ta=[eye(3) zeros(3,3);zeros(3,3) TJ]
 Ja=inv(Ta)*J
+T03 = T0i{3};
+last_col = T03(:,4);
+fwd_kin = matlabFunction(last_col)

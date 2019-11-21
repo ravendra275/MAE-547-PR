@@ -1,5 +1,5 @@
 clc
-clear all
+
 % Inputing the number of links
 Number_of_Links = input(' Enter the Number of Links in the Robot - ');
 disp(' ');
@@ -25,21 +25,23 @@ for i = 1:Number_of_Links
         a(i,1)     = input(' Link Length - ');
         d(i,1)     = input(' Distance d - ');
         alpha(i,1) = input(' Angle alpha in radians - ');
-        theta(i,1) = input(' Angle theta in radians - ');
         disp(' ')
     else
         disp(' For Defined Prismatic Joint ')
         a(i,1)     = input(' Link Length - ');
-        d(i,1)     = input(' Distance d - ');
         alpha(i,1) = input(' Angle alpha in radians - ');
         theta(i,1) = input(' Angle theta in radians - ');
         disp(' ')
+    end
+    if por(i)=='r'
+        DH(i,:) = [0 d(i,1) a(i,1) alpha(i,1)];
+    else
+        DH(i,:) = [theta(i,1) 0 a(i,1) alpha(i,1)];
     end
 end
 disp(' ')
 disp(' Below are the inputed DH Parameters ')
 disp(' in order of theta d a alpha ')
-DH = [theta d a alpha]
 else
 for i = 1:Number_of_Links
     if por(i)=='r'
@@ -81,7 +83,40 @@ for b = 1:Number_of_Links
 end
 n = 1:Number_of_Links;
 m =[X(n)];
-R = SerialLink(m);
+R = SerialLink(m)
+disp(' ')
+%Joint Velocities Entry
+q = DH(:,1);
+alpha = DH(:,4);
+a = DH(:,3);
+d = DH(:,2);
+disp(' ')
+fprintf('Enter the euler angle pose- zyz or zyx ');    
+fprintf('Press zyz for zyz end pose,\nPress zyx for zyx end pose\n');
+ 
+euler=input(' zyz end pose or zyx end pose: ','s');
+if xor(strcmp(euler,'zyz'),strcmp(euler,'zyx')) == 0
+    fprintf('Invalid input. Press p for prismatic joint, Press r for revolute joint\n');
+    %exit;
+elseif (strcmp(euler,'zyz'))== 1
+    fprintf('Now we will calculate zyz transformation matrix/n');
+
+    smallphi = input('Enter the z angle ');
+    theta = input('Enter the y angle ');
+    %psi = input('Enter the z1 angle');
+    TJ= [0 -sin(smallphi) cos(smallphi)*sin(theta);...
+        0 cos(smallphi) sin(smallphi)*sin(theta);...
+        1 0 cos(theta)]
+elseif (strcmp(euler,'zyx'))== 1
+    fprintf('Now we will calculate zyx transformation matrix/n');
+    smallphi = input('Enter the z angle ');
+    theta = input('Enter the y angle ');
+    TJ= [0 -sin(smallphi) cos(smallphi)*cos(theta);...
+        0 cos(smallphi) sin(smallphi)*cos(theta);...
+        1 0 -sin(theta)]
+end
+Ta=[eye(3) zeros(3,3);zeros(3,3) TJ]
+
 disp(' ')
 T = input(' Time of the inverse differential ');
 disp(' ')
@@ -101,14 +136,16 @@ phid = matlabFunction([Phi]);
 phid_dot = (phid(t + dt) - phid(t)) / dt ;
 phid = phid(t);
 q= zeros(Number_of_Links,length(t));
-q(:,1) = q_in';
-
+q(:,1) = q_in;
+K = eye(4);
+    
 for i = 1:length(t)
-    xe(:,i)= fwd_kin(a(:,i), d(:,i), q(:,i));% Forward kinematics function attached with published file
-    Ja = an_Ja(L1, L2, q(:,i)); % inverse Jacobian Function attached with the published file
+    T = R.fkine(q(:,i)');
+    xe(:,i)= T(:,4);
+    J = R.jacob0(q(:,i));
+    Ja = inv(Ta)*J;
     e(:,i)=[pd(:,i); phid(i)] - xe(:,i);
-    xd_dot=[pd_dot(:,i); phid_dot];
-    qdot = inv(Ja)*(xd_dot+K*e(:,i));
+    xd_dot=[pd_dot(:,i); phid_dot(:,i)];
+    qdot = pinv(Ja(1:4,:))*(xd_dot+K*e(:,i));
     q(:,i+1)=q(:,i)+qdot*0.01;
 end
-max(e(:,length(t)))

@@ -175,7 +175,7 @@ elseif (strcmp(euler,'zyx'))== 1
 end
 Ta=[eye(3) zeros(3,3);zeros(3,3) TJ]
 Ja=inv(Ta)*J
-<<<<<<< HEAD
+%<<<<<<< HEAD
 
 for i=1:x
     if por(i)=='r'
@@ -194,8 +194,19 @@ end
 n = 1:x;
 m =[X(n)];
 R = SerialLink(m);
-=======
+%=======
 T03 = T0i{3};
 last_col = T03(:,4);
 fwd_kin = matlabFunction(last_col)
->>>>>>> fecb51ffc98b1d8c4d44137fd79b0f559046c4c1
+
+N = size(J,1) ;                  % number of rows
+IncludeTF = false(N,1) ;         % by default, exclude all rows, except ...
+IncludeTF(1) = true ;            % first row which can always be included
+R0 = rank(J) ;                   % the original rank
+for k = 2:N,                     % loop over all rows
+   B = J(IncludeTF,:) ;          % select the currently included rows of A
+   IncludeTF(k) = rank(B) < R0 ; % include in B when the rank is less
+end
+isequal(rank(B), R0)             % check!
+
+%>>>>>>> fecb51ffc98b1d8c4d44137fd79b0f559046c4c1

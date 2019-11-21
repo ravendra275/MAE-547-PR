@@ -25,21 +25,23 @@ for i = 1:Number_of_Links
         a(i,1)     = input(' Link Length - ');
         d(i,1)     = input(' Distance d - ');
         alpha(i,1) = input(' Angle alpha in radians - ');
-        theta(i,1) = input(' Angle theta in radians - ');
         disp(' ')
     else
         disp(' For Defined Prismatic Joint ')
         a(i,1)     = input(' Link Length - ');
-        d(i,1)     = input(' Distance d - ');
         alpha(i,1) = input(' Angle alpha in radians - ');
         theta(i,1) = input(' Angle theta in radians - ');
         disp(' ')
+    end
+    if por(i)=='r'
+        DH(i,:) = [0 d(i,1) a(i,1) alpha(i,1)];
+    else
+        DH(i,:) = [theta(i,1) 0 a(i,1) alpha(i,1)];
     end
 end
 disp(' ')
 disp(' Below are the inputed DH Parameters ')
 disp(' in order of theta d a alpha ')
-DH = [theta d a alpha]
 else
 for i = 1:Number_of_Links
     if por(i)=='r'
@@ -81,34 +83,69 @@ for b = 1:Number_of_Links
 end
 n = 1:Number_of_Links;
 m =[X(n)];
-R = SerialLink(m);
+R = SerialLink(m)
 disp(' ')
-T = input(' Time of the inverse differential ');
-disp(' ')
-syms t;
-Px  = input(' Input X position as Time Function - ');
-Py  = input(' Input Y position as Time Function - ');
-Pz  = input(' Input Z position as Time Function - ');
-Phi = input(' Input Total Joint angle as Time Funtion - ');
-q_in = input(' Initial Condition of joint variables in Matrix Format - ')
-disp(' ')
-t = 1:0.1:T;
-dt = 1e-8;
-pd = matlabFunction([Px; Py; Pz]);
-pd_dot = (pd(t + dt) - pd(t)) / dt ;
-pd = pd(t);
-phid = matlabFunction([Phi]);
-phid_dot = (phid(t + dt) - phid(t)) / dt ;
-phid = phid(t);
-q= zeros(Number_of_Links,length(t));
-q(:,1) = q_in';
+%Joint Velocities Entry
+Vx = input(' Input The End Effector Linear Velocity in X direction - ')
+Vy = input(' Input The End Effector Linear Velocity in Y direction - ')
+Vz = input(' Input The End Effector Linear Velocity in Z direction - ')
+Wx = input(' Input The End Effector Angular Velocity wrt X axis - ')
+Wy = input(' Input The End Effector Angular Velocity wrt Y axix - ')
+Wz = input(' Input The End Effector Angular Velocity wrt Z axis - ')
+q0 = input(' Input initial Joint Positions in Matrix Form, like [q1 q2 ... qn] ')
+t  = input(' Input Time at which you want Joint Variables - ')
+q0 = q0';
+q = DH(:,1);
+alpha = DH(:,4);
 
-for i = 1:length(t)
-    xe(:,i)= fwd_kin(a(:,i), d(:,i), q(:,i));% Forward kinematics function attached with published file
-    Ja = an_Ja(L1, L2, q(:,i)); % inverse Jacobian Function attached with the published file
-    e(:,i)=[pd(:,i); phid(i)] - xe(:,i);
-    xd_dot=[pd_dot(:,i); phid_dot];
-    qdot = inv(Ja)*(xd_dot+K*e(:,i));
-    q(:,i+1)=q(:,i)+qdot*0.01;
-end
-max(e(:,length(t)))
+for i = 1:Number_of_Links    
+    T{i} = [cos(q(i)) -sin(q(i))*cos(alpha(i)) sin(q(i))*sin(alpha(i)) a(i)*cos(q(i));
+            sin(q(i)) cos(q(i))*cos(alpha(i)) -cos(q(i))*sin(alpha(i)) a(i)*sin(q(i));
+            0 sin(alpha(i)) cos(alpha(i)) d(i);        0 0 0 1];
+ end
+
+ T0i{1}=T{1};
+ for i=1:Number_of_Links-1
+     T0i{i+1}=T0i{i}*T{i+1};
+ end
+ 
+ p0=[0 0 0]';
+ z0=[0 0 1]';
+ for i=1:Number_of_Links
+     p(1:3,i)=T0i{i}(1:3,4);
+     z(1:3,i)=T0i{i}(1:3,3);
+ end
+ 
+ for i=1:Number_of_Links
+     if por(i)=='p'
+         if i==1
+            Jp(1:3,i)= z0;
+            Jo(1:3,i)= [0 0 0]';
+         else
+            Jp(1:3,i)= z(:,i-1);
+            Jo(1:3,i)= [0 0 0]';
+         end
+         
+     elseif por(i)=='r'
+         if i==1
+            Jp(1:3,i)= cross(z0,p(:,Number_of_Links)-p0);
+            Jo(1:3,i)= z0;
+         else
+            Jp(1:3,i)= cross(z(:,i-1),p(:,Number_of_Links)-p(:,i-1));
+            Jo(1:3,i)= z(:,i-1);
+         end
+     end
+ end
+ J=[Jp;Jo];
+ 
+ Ve = [Vx Vy Vz Wx Wy Wz]';
+ 
+q_dot = pinv(J)*Ve;
+
+
+ q = q0 + q_dot*t
+
+disp(' ')
+disp(' The Joint Variables at the Given Time are - ')
+disp(q)
+    

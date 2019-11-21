@@ -14,16 +14,17 @@ q_lim = [-pi        pi;
          -0.1  1;
          -pi              pi;];
 
-R = SerialLink([L1 L2 L3 L4],'qlim',q_lim)
+R = SqerialLink([L1 L2 L3 L4],'qlim',q_lim)
 t = 1:0.1:4;
 q = [pi/2*t; -pi/2*t; 0.1*t; pi/2*t]';
 W = [-5 5 -5 5 -5 5];
 % figure(1)
-plot(R ,q ,'workspace',W)
-R.animate(q)
+% plot(R ,q ,'workspace',W)
+% R.animate(q)
 t1 = linspace(0,360,90)*pi/180;
 t2 = linspace(-120,120,90)*pi/180;
 t3 = linspace(-90,90,90)*pi/180;
+hold on
 
 d3 = linspace(0,0.5,40);
 d4 = linspace(0,1,40);
@@ -32,5 +33,8 @@ xM = (dh(1,3))*cos(T1)+(dh(2,3))*cos(T1+T2)+2*cos(T1+T2+T3);
 yM = (dh(1,3))*sin(T1)+(dh(2,3))*sin(T1+T2)+2*sin(T1+T2+T3);
 zM = zeros(1,length(xM(:)));
 
- figure(2)
- plot3(xM(:),yM(:),zM(:),'--');
+%  figure(2)
+plot3(xM(:),yM(:),zM(:),'--');
+%plot(R ,q ,'workspace',W)
+% R.animate(q)
+% teach(R)

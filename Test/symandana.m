@@ -166,7 +166,7 @@ elseif (strcmp(euler,'zyz'))== 1
         0 cos(smallphi) sin(smallphi)*sin(theta);...
         1 0 cos(theta)]
 elseif (strcmp(euler,'zyx'))== 1
-    fprintf('Now we will calculate zyx transformation matrix/n');
+    fprintf('Now we will calculate zyx transformation matrix\n');
     smallphi = input('Enter the z angle ');
     theta = input('Enter the y angle ');
     TJ= [0 -sin(smallphi) cos(smallphi)*cos(theta);...
@@ -175,3 +175,21 @@ elseif (strcmp(euler,'zyx'))== 1
 end
 Ta=[eye(3) zeros(3,3);zeros(3,3) TJ]
 Ja=inv(Ta)*J
+
+for i=1:x
+    if por(i)=='r'
+        L{i}=Link('d',DH(i,2),'a',DH(i,3),'alpha',DH(i,4));
+    elseif por(i)=='p'
+        limitlow(i)   = input(' Lower limit for the joint - ');
+        limitupper(i) = input(' Upper limit for the joint - ');
+        L{i}=Link('theta',DH(i,1),'a',DH(i,3),'alpha',DH(i,4));
+        L{i}.qlim = [limitlow(i), limitupper(i)];
+    end
+end
+
+for b = 1:x
+    X(b) = L{b};
+end
+n = 1:x;
+m =[X(n)];
+R = SerialLink(m);

@@ -36,9 +36,9 @@ for i=1:x
     alpha(i)=input('');
 end
 lno=[1:x];
-DH= [lno; q; d; a; alpha]'
- DH=array2table(DH,...
-     'VariableNames',{'Link no.','q','d','a','alpha'})
+DH= [q; d; a; alpha]'
+%  DH=array2table(DH,...
+%      'VariableNames',{'Link no.','q','d','a','alpha'})
 
  for i = 1:x    
     T{i} = [cos(q(i)) -sin(q(i))*cos(alpha(i)) sin(q(i))*sin(alpha(i)) a(i)*cos(q(i));
@@ -79,3 +79,25 @@ DH= [lno; q; d; a; alpha]'
      end
  end
  J=[Jp;Jo]
+ 
+ for i=1:x
+    if por(i)=='r'
+        L{i}=Link('d',DH(i,2),'a',DH(i,3),'alpha',DH(i,4));
+    elseif por(i)=='p'
+        limitlow(i)   = input(' Lower limit for the joint - ');
+        limitupper(i) = input(' Upper limit for the joint - ');
+        L{i}=Link('theta',DH(i,1),'a',DH(i,3),'alpha',DH(i,4));
+        L{i}.qlim = [limitlow(i), limitupper(i)];
+    end
+end
+
+for b = 1:x
+    X(b) = L{b};
+end
+n = 1:x;
+m =[X(n)];
+R = SerialLink(m);
+ 
+jangleconfig= input('Input the joint angle configuration matrix/n ');
+svd( jacobn(R, jangleconfig))
+ 

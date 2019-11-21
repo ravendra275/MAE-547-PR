@@ -151,7 +151,7 @@ view(0,20)
  zlim([0,60])
 
  for i=1:1:154
-     atj=Rbt.fkine(traj1(i,:));
+     atj=Rbt.fkine(traj1(i-1,:));
      jta=transpose(atj);
      JTA(i,:)=jta(4,1:3);
      jta=JTA;

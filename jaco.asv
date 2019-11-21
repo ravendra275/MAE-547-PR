@@ -61,9 +61,27 @@ DH= [lno; q; d; a; alpha]'
  for i=1:x
      if por(i)=='p'
          if i==1
-            Jp(1:3,i)= z0
-            Jo(1:3,i)= [0 0 0]'
+            Jp(1:3,i)= z0;
+            Jo(1:3,i)= [0 0 0]';
          else
-            Jp(1:3,i)= z(i-1)
-            Jo(1:3,i)= [0 0 0]'
-            
+            Jp(1:3,i)= z(:,i-1);
+            Jo(1:3,i)= [0 0 0]';
+         end
+         
+     elseif por(i)=='r'
+         if i==1
+            Jp(1:3,i)= cross(z0,p(:,x)-p0);
+            Jo(1:3,i)= z0;
+         else
+            Jp(1:3,i)= cross(z(:,i-1),p(:,x)-p(:,i-1));
+            Jo(1:3,i)= z(:,i-1);
+         end
+     end
+ end
+ J=[Jp;Jo]
+ 
+ 
+ 
+ jangleconfig= input('Input the joint angle configuration matrix/n ');
+ 
+ 

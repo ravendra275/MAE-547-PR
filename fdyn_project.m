@@ -46,12 +46,14 @@ else
     tau=input('Input torque as a function of joint angles eg q: ')
 end
 
-tau=matlabFunction(t,q,qd,a);
+tau=matlabFunction(t,q,qd,a);% I don't think this will work as 'a' is defined only in the torqfunction 
 
 %Input initial conditions
 q0=input('Initial joint position (in meters or radians):')
 qd0=input('Initial joint derivatives (in m/s or rad/s): ')
 
 [T,q,qd]=R.fdyn(@tau,q0,qd0)
+
+%Add the function @ tau before using it 
 
 %Write plotting routine now

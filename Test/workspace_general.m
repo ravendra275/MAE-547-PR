@@ -1,3 +1,6 @@
+clc
+clear all
+
 x= input('Enter number of links: ');
 
 for i=1:x
@@ -63,6 +66,17 @@ n = 1:x;
 m =[X(n)];
 R = SerialLink(m,'qlim',q);
 
+t=zeros(90,x);
+for i=1:x
+    if por(i)=='r'
+        t(:,i)=linspace( rad2deg(q(i,1)),rad2deg(q(i,2)),90);
+    elseif por(i)=='p'
+        t(:,i)=linspace(q(i,1),q(i,2),40);
+    end
+    %T{i}=ndgrid(t{i});
+end
+
+%R.plot3d(t);
 syms q1 [1 x];
 assume(q1,'real')
 syms d1 [1 x];
@@ -71,16 +85,41 @@ syms a1 [1 x];
 assume(a1,'real')
 syms alpha1 [1 x];
 
-for i = 1:x    
-    Tr{i} = [cos(q1(i)) -sin(q1(i))*(cos(alpha1(i))) sin(q1(i))*(sin(alpha1(i))) a1(i)*cos(q1(i));
-            sin(q1(i)) cos(q1(i))*(cos(alpha1(i))) -cos(q1(i))*(sin(alpha1(i))) a1(i)*sin(q1(i));
-            0 (sin(alpha1(i))) (cos(alpha1(i))) d1(i);0 0 0 1];
+for j=1:2
+    for i = 1:x    
+        Tr{i,j} = [cos(q(i,j)) -sin(q(i,j))*(cos(alpha(i))) sin(q(i,j))*(sin(alpha(i))) a(i)*cos(q(i,j));
+                sin(q(i,j)) cos(q(i,j))*(cos(alpha(i))) -cos(q(i,j))*(sin(alpha(i))) a(i)*sin(q(i,j));
+                0 (sin(alpha(i))) (cos(alpha(i))) d(i);0 0 0 1];
  end
-
- T0i{1}=Tr{1};
+end
+ T0i1{1}=Tr{1,1};
  for i=1:x-1
-     T0i{i+1}=T0i{i}*Tr{i+1};
+     T0i1{i+1}=T0i1{i}*Tr{i+1,1};
  end
+T0i2{1}=Tr{1,2};
+ for i=1:x-1
+     T0i2{i+1}=T0i2{i}*Tr{i+1,2};
+ end
+ 
+T1=[eye(3) T0i1{2}(1:3,4);0 0 0 1];
+t2=[eye(3) T0i2{2}(1:3,4);0 0 0 1];
+w=zeros(50,x);
+w=R.jtraj(T1, t2, 10000)
+
+q_f1=R.fkine(w);
+x_traj = zeros(1,10000);
+y_traj = zeros(1,10000);
+z_traj = zeros(1,10000);
+
+for i=1:10000
+x_traj(1,i) = q_f1(1,4,i);
+y_traj(1,i) = q_f1(2,4,i);
+z_traj(1,i) = q_f1(3,4,i);
+end
+
+hold on
+[x,y,z] = sphere(16);
+scatter3(x_traj,y_traj,z_traj,'.');
 
 subs q1;
 subs d1;
@@ -112,19 +151,35 @@ for i=1:x
     T{i}=ndgrid(t{i});
 end
 
+% % 
+% % q11=T{1}
+% % q12=T{2}
+% % q13=T{3}
 % 
-% q11=T{1}
-% q12=T{2}
-% q13=T{3}
-
-for b = 1:x
-    limits{b} = T{b};
+% for b = 1:x
+%     limits{b} = T{b};
+% end
+% n = 1:x;
+% s =[limits(n)];
+% 
+%  for i=1:3
+%      q1{i}=T{i};
+%  end
+% % T0i{3}
+% % subs(T0i{3})
+vstup=0;
+while (vstup ~= 1)
+R.plot(w)
 end
-n = 1:x;
-s =[limits(n)];
 
- for i=1:3
-     q1{i}=T{i};
- end
-% T0i{3}
-% subs(T0i{3})
+m=zeros(1,6)
+m1=0
+while m1<x
+    r=randperm(6,1)
+    if m(r)~=1
+        m(r)=1;
+        m1=m1+1;
+    end
+end
+
+

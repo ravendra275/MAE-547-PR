@@ -14,7 +14,7 @@ q_lim = [-pi        pi;
          -0.1  1;
          -pi              pi;];
 
-R = SqerialLink([L1 L2 L3 L4],'qlim',q_lim)
+R = SerialLink([L1 L2 L3 L4],'qlim',q_lim)
 t = 1:0.1:4;
 q = [pi/2*t; -pi/2*t; 0.1*t; pi/2*t]';
 W = [-5 5 -5 5 -5 5];

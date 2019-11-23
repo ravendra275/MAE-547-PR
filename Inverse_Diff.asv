@@ -95,10 +95,50 @@ Wz = input(' Input The End Effector Angular Velocity wrt Z axis - ')
 q0 = input(' Input initial Joint Positions in Matrix Form, like [q1 q2 ... qn] ')
 t  = input(' Input Time at which you want Joint Variables - ')
 q0 = q0';
+q = DH(:,1);
+alpha = DH(:,4);
 
-J=R.jacob0(q0);
-Time = 1:0.1:t;
-Ve = [Vx Vy Vz Wx Wy Wz]';
+for i = 1:Number_of_Links    
+    T{i} = [cos(q(i)) -sin(q(i))*cos(alpha(i)) sin(q(i))*sin(alpha(i)) a(i)*cos(q(i));
+            sin(q(i)) cos(q(i))*cos(alpha(i)) -cos(q(i))*sin(alpha(i)) a(i)*sin(q(i));
+            0 sin(alpha(i)) cos(alpha(i)) d(i);        0 0 0 1];
+ end
+
+ T0i{1}=T{1};
+ for i=1:Number_of_Links-1
+     T0i{i+1}=T0i{i}*T{i+1};
+ end
+ 
+ p0=[0 0 0]';
+ z0=[0 0 1]';
+ for i=1:Number_of_Links
+     p(1:3,i)=T0i{i}(1:3,4);
+     z(1:3,i)=T0i{i}(1:3,3);
+ end
+ 
+ for i=1:Number_of_Links
+     if por(i)=='p'
+         if i==1
+            Jp(1:3,i)= z0;
+            Jo(1:3,i)= [0 0 0]';
+         else
+            Jp(1:3,i)= z(:,i-1);
+            Jo(1:3,i)= [0 0 0]';
+         end
+         
+     elseif por(i)=='r'
+         if i==1
+            Jp(1:3,i)= cross(z0,p(:,Number_of_Links)-p0);
+            Jo(1:3,i)= z0;
+         else
+            Jp(1:3,i)= cross(z(:,i-1),p(:,Number_of_Links)-p(:,i-1));
+            Jo(1:3,i)= z(:,i-1);
+         end
+     end
+ end
+ J=[Jp;Jo];
+ Time = 1:0.1:t;
+ Ve = [Vx Vy Vz Wx Wy Wz]';
 q= zeros(Number_of_Links,length(Time));
 q(:,1) = q0'; 
 q_dot = pinv(J)*Ve;

@@ -42,7 +42,7 @@ end
 disp(' ')
 disp(' Below are the inputed DH Parameters ')
 disp(' in order of theta d a alpha ')
-disp(DH)
+
 else
 for i = 1:Number_of_Links
     if por(i)=='r'
@@ -85,14 +85,24 @@ end
 n = 1:Number_of_Links;
 m =[X(n)];
 R = SerialLink(m)
-phi = input(' Input total angle phi till the end effector - ');
+Eul = input(' End pose defined with ZYZ or RPY Euler angle - ','s')
+if Eul=='ZYZ'
+    phi = input(' Input angle (z)phi in degrees - ');
+    theta = input(' Input angle (y)theta in degrees - ');
+    psi = input(' Input angle (z1)psi in degrees - ');
+    Rot = eul2r(phi,theta,psi,'deg');
+else
+    phi = input(' Input angle (z)phi in degrees - ');
+    theta = input(' Input angle (y)theta in degrees - ');
+    psi = input(' Input angle (x)psi in degrees - ');
+    Rot = rotz(phi*pi/180)*roty(theta*pi/180)*rotx(psi*pi/180);
+end
+    
 Px  = input(' Input Position in wrt to X axis - ');
 Py  = input(' Input Position in wrt to Y axis - ');
 Pz  = input(' Input Position in wrt to Z axis - ');
-T = [ cos(phi) -sin(phi) 0 Px;
-      sin(phi)  cos(phi) 0 Py;
-      0 0 1 Pz;
-      0 0 0 1];
+T = [ Rot;0 0 0];
+T = [T,[Px;Py;Pz;1]];
 
 disp(' ');
 disp(' The Joint parameters from given end effector pose are - ')

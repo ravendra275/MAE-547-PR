@@ -93,22 +93,22 @@ Wx = input(' Input The End Effector Angular Velocity wrt X axis - ')
 Wy = input(' Input The End Effector Angular Velocity wrt Y axix - ')
 Wz = input(' Input The End Effector Angular Velocity wrt Z axis - ')
 q0 = input(' Input initial Joint Positions in Matrix Form, like [q1 q2 ... qn] ')
-t  = input(' Input Time at which you want Joint Variables - ')
+% t  = input(' Input Time at which you want Joint Variables - ')
 q0 = q0';
 
 J=R.jacob0(q0);
-Time = 1:0.1:t;
+% Time = 1:0.1:t;
 Ve = [Vx Vy Vz Wx Wy Wz]';
-q= zeros(Number_of_Links,length(Time));
+% q= zeros(Number_of_Links,length(Time));
 q(:,1) = q0'; 
-q_dot = pinv(J)*Ve;
-
-for i = 1:length(Time)
-% q = q0 + q_dot*t;
-q(:,i+1)=q(:,i)+q_dot*0.01;
-end
-
-
-disp(' ')
-disp([' The Joint Variables at the ',num2str(t),'th second are - '])
-disp(q(:,end))
+q_dot = pinv(J)*Ve
+ 
+% for i = 1:length(Time)
+% % q = q0 + q_dot*t;
+% q(:,i+1)=q(:,i)+q_dot*0.01;
+% end
+% 
+% 
+% disp(' ')
+% disp([' The Joint Variables at the ',num2str(t),'th second are - '])
+% disp(q(:,end))

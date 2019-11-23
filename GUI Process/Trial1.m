@@ -22,7 +22,7 @@ function varargout = Trial1(varargin)
 
 % Edit the above text to modify the response to help Trial1
 
-% Last Modified by GUIDE v2.5 23-Nov-2019 00:45:08
+% Last Modified by GUIDE v2.5 23-Nov-2019 13:53:27
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -73,8 +73,53 @@ function varargout = Trial1_OutputFcn(hObject, eventdata, handles)
 varargout{1} = handles.output;
 
 
-% --- Executes on button press in pushbutton1.
-function pushbutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
+% --- Executes on button press in LinkNumber.
+function LinkNumber_Callback(hObject, eventdata, handles)
+% hObject    handle to LinkNumber (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes during object creation, after setting all properties.
+
+
+
+function NumberofLinks_Callback(hObject, eventdata, handles)
+% hObject    handle to NumberofLinks (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of NumberofLinks as text
+%        str2double(get(hObject,'String')) returns contents of NumberofLinks as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function NumberofLinks_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to NumberofLinks (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+N = str2double(handles.NumberofLinks.String);
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in pushbutton2.
+function pushbutton2_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+set(handles.text2,'String',get(handles.NumberofLinks,'String'));
+
+
+% --- Executes on button press in pushbutton3.
+function pushbutton3_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+N = 0;
+set()

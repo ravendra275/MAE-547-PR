@@ -18,12 +18,14 @@ if xor(strcmp(c,'1'),strcmp(c,'2')) == 0
         %exit;
 end
 if c=='1'
-   z = input('Enter the z angle');
-   y = input('Enter the y angle');
-   z1 = input('Enter the z1 angle');
-   zyz = [cos(z)*cos(y)*cos(z1)-sin(z)*sin(z1) -cos(z)*cos(y)*cos(z1) cos(z)*sin(y); sin(z)*cos(y)*cos(z1)-cos(z)*sin(z1) -sin(z)*cos(y)*sin(z)+cos(z)*cos(z1) sin(z)*sin(z1); -sin(y)*cos(z1) sin(y)*sin(z1) cos(z)]
-R = zyz;
-    
+   z = input('Enter the z angle in degrees - ');
+   y = input('Enter the y angle in degrees - ');
+   z1 = input('Enter the z1 angle in degrees - ');
+%    zyz = [cos(z)*cos(y)*cos(z1)-sin(z)*sin(z1) -cos(z)*cos(y)*cos(z1) cos(z)*sin(y);
+%             sin(z)*cos(y)*cos(z1)-cos(z)*sin(z1) -sin(z)*cos(y)*sin(z)+cos(z)*cos(z1) sin(z)*sin(z1);
+%             -sin(y)*cos(z1) sin(y)*sin(z1) cos(z)]
+%    R = zyz;
+    R = eul2r(z, y, z1, 'deg')
 end
 
 if c=='2'
@@ -46,12 +48,14 @@ if xor(strcmp(c,'1'),strcmp(c,'2')) == 0
 end
 
 if c=='1'
-z = input('Enter the z angle');
-y = input('Enter the y angle');
-x = input('Enter the x angle');
+z = input('Enter the z angle in degrees - ');
+y = input('Enter the y angle in degrees - ');
+x = input('Enter the x angle in degrees - ');
 
-zyx = [cos(z)*cos(y) cos(z)*sin(y)*sin(x)-sin(z)*cos(x) cos(z)*sin(y)*cos(x)+sin(z)*sin(x); sin(x)*cos(y) sin(z)*sin(y)*sin(x)+cos(z)*cos(x) sin(z)*sin(y)*cos(x)-cos(z)*sin(x); -sin(y) cos(y)*sin(x) cos(y)*cos(x)]
-R = zyx;
+% zyx = [cos(z)*cos(y) cos(z)*sin(y)*sin(x)-sin(z)*cos(x) cos(z)*sin(y)*cos(x)+sin(z)*sin(x);
+%         sin(z)*cos(y) sin(z)*sin(y)*sin(x)+cos(z)*cos(x) sin(z)*sin(y)*cos(x)-cos(z)*sin(x);
+%             -sin(y) cos(y)*sin(x) cos(y)*cos(x)]
+R = eul2r(z, y, z1, 'deg', 'zyx')
     
 end
 

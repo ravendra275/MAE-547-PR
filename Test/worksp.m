@@ -103,23 +103,10 @@ T0i2{1}=Tr{1,2};
  
 T1=[eye(3) T0i1{2}(1:3,4);0 0 0 1];
 t2=[eye(3) T0i2{2}(1:3,4);0 0 0 1];
-w=zeros(10000,x);
-
-% m=zeros(1,6)
-% m1=0
-% while m1<x
-%     r=randperm(6,1)
-%     if m(r)~=1
-%         m(r)=1;
-%         m1=m1+1;
-%     end
-% end
-% m=[1 1 1 0 0 0];
-
+w=zeros(50,x);
 w=R.jtraj(T1, t2, 10000)
-    
-q_f1=R.fkine(w);
 
+q_f1=R.fkine(w);
 x_traj = zeros(1,10000);
 y_traj = zeros(1,10000);
 z_traj = zeros(1,10000);
@@ -131,42 +118,38 @@ z_traj(1,i) = q_f1(3,4,i);
 end
 
 hold on
-for i=1:10000
-R.plot([w(i,:)],'delay',1e-200);
 [x,y,z] = sphere(16);
-plot3(x_traj(1,i),y_traj(1,i),z_traj(1,i),'.');
-hold on;
+scatter3(x_traj,y_traj,z_traj,'.');
+
+subs q1;
+subs d1;
+subs a1;
+subs alpha1;
+
+q1=q1';
+d1=d1';
+a1=a1'
+alpha1=alpha1';
+
+for i=1:x
+    %q1(i)=q;
+    d1(i)=d(i);
+    a1(i)=a(i);
+    alpha1(i)=alpha(i);
 end
-% 
-% subs q1;
-% subs d1;
-% subs a1;
-% subs alpha1;
-% 
-% q1=q1';
-% d1=d1';
-% a1=a1'
-% alpha1=alpha1';
-% 
-% for i=1:x
-%     %q1(i)=q;
-%     d1(i)=d(i);
-%     a1(i)=a(i);
-%     alpha1(i)=alpha(i);
-% end
  %q1=q;
 % d1=d;
 % a1=a;
 % alpha1=alpha;
 % 
-% for i=1:x
-%     if por(i)=='r'
-%         t{i}=linspace( rad2deg(q(i,1)),rad2deg(q(i,2)),90);
-%     elseif por(i)=='p'
-%         t{i}=linspace(q(i,1),q(i,2),40);
-%     end
-%     T{i}=ndgrid(t{i});
-% end
+for i=1:x
+    if por(i)=='r'
+        t{i}=linspace( rad2deg(q(i,1)),rad2deg(q(i,2)),90);
+    elseif por(i)=='p'
+        t{i}=linspace(q(i,1),q(i,2),40);
+    end
+    T{i}=ndgrid(t{i});
+end
 
 % % 
 % % q11=T{1}
@@ -184,13 +167,17 @@ end
 %  end
 % % T0i{3}
 % % subs(T0i{3})
+vstup=0;
+while (vstup ~= 1)
+R.plot(w)
+end
 
-
-
-% vstup=0;
-% while (vstup ~= 1)
-% R.plot(w)
-% end
-
-
-
+m=zeros(1,6)
+m1=0
+while m1<x
+    r=randperm(6,1)
+    if m(r)~=1
+        m(r)=1;
+        m1=m1+1;
+    end
+end

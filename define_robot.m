@@ -1,5 +1,5 @@
 % Inputing the number of links
-%{
+
 Number_of_Joints = input(' Enter the Number of Links in the Robot - ');
 disp(' ');
 i=1;
@@ -91,4 +91,4 @@ n = 1:Number_of_Joints;
 m =[X(n)];
 %The following is the robot object
 R = SerialLink(m);
-%}
+

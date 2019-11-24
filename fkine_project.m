@@ -1,7 +1,7 @@
 
 clear all
 % Inputing the number of links
-%{
+
 Number_of_Joints = input(' Enter the Number of Links in the Robot - ');
 disp(' ');
 i=1;
@@ -104,7 +104,8 @@ R = SerialLink(m);
 %}
 
 %% Take the generalized joint angles as input
-disp('One by one, input the joint actuation (angles in degrees for revolute joints and lengths in metres for prismatic joints)')
+disp('One by one, input the joint actuation (angles in degrees for revolute joints and lengths in metres for prismatic joints) - ')
+disp(' ')
 
 q=[];%Joint angles
 for q_count=1:Number_of_Joints

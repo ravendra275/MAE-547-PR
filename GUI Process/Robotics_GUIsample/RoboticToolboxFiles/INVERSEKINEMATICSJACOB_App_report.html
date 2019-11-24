@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Trial1 Migration Report</title>
+    <title>INVERSEKINEMATICSJACOB Migration Report</title>
     <style type="text/css">
         html body {
             height: 100%;
@@ -195,26 +195,26 @@
 </head>
 <body>
     <div class="reportTitle">
-        <h1>Trial1 Migration Report</h1>
+        <h1>INVERSEKINEMATICSJACOB Migration Report</h1>
     </div>
     <div class="reportBody">
         <section>
             <h2>Completed by Migration Tool</h2>
             <ul>
-                <li>Generated Trial1_App.mlapp from Trial1.fig and Trial1.m</li>
+                <li>Generated INVERSEKINEMATICSJACOB_App.mlapp from INVERSEKINEMATICSJACOB.fig and INVERSEKINEMATICSJACOB.m</li>
                 <li>Converted components and configured their properties</li>
                 <li>Copied GUIDE callback and utility function code</li>
-                <li>Analyzed Trial1.m for unsupported MATLAB API usage</li>
+                <li>Analyzed INVERSEKINEMATICSJACOB.m for unsupported MATLAB API usage</li>
             </ul>
             <h2>Your Next Steps</h2>
             <ol>
-                <li>Decide whether to continue migrating the Trial1 app depending on whether it has important features that are not supported in App Designer.</li>
+                <li>Decide whether to continue migrating the INVERSEKINEMATICSJACOB app depending on whether it has important features that are not supported in App Designer.</li>
                 <li>Update the app code to use new APIs.</li>
             </ol>
         </section>
         <section>
-            <h2>Step 1: Decide Whether to Continue Migrating the Trial1 App</h2>
-            <p>No unsupported functionality detected in Trial1.</p>
+            <h2>Step 1: Decide Whether to Continue Migrating the INVERSEKINEMATICSJACOB App</h2>
+            <p>No unsupported functionality detected in INVERSEKINEMATICSJACOB.</p>
             
         </section>
         <section>
@@ -268,8 +268,16 @@
                     <div class="arrowBody arrowGrow"></div>
                 </div>
             </div>
-            <h3 id="partiallySupportedHeader">Partially Supported Functionality in Trial1 and Workarounds</h3>
-            No partially supported functionality detected in Trial1.
+            <h3 id="partiallySupportedHeader">Partially Supported Functionality in INVERSEKINEMATICSJACOB and Workarounds</h3>
+            <table class="partialSupportTable">
+    <tr>
+        <th>Functionality</th>
+        <th>Details and Workarounds</th>
+        <th>GUIDE Tag</th>
+    </tr>
+    <tr><td>ColumnFormat</td><td class="partialDetails"><div class="partialDetailsMsg">You must configure this property programmatically in App Designer.</div><div class=partialWorkaround><h5>Workaround:</h5><div>Add the following code to the beginning of <code>INVERSEKINEMATICSJACOB_OpeningFcn</code>.</div><div class="workaroundCode"><div><code>app.uitable2.ColumnFormat = {[]};</code></div></div></div></td><td><div class="">uitable2</div></td></tr>
+<tr><td>Data</td><td class="partialDetails"><div class="partialDetailsMsg">You must configure this property programmatically in App Designer.</div><div class=partialWorkaround><h5>Workaround:</h5><div>Set this property at the beginning of the <code>INVERSEKINEMATICSJACOB_OpeningFcn</code>.</div></div></td><td><div class="">uitable2</div></td></tr>
+</table>
             <h3 id="errorMessagesHeader">Common Error Messages and Suggested Actions</h3>
             <table>
                 <tr class="errorRowOdd">

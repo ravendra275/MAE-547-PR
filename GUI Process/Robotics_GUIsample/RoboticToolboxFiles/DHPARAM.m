@@ -278,8 +278,15 @@ end
 set(handles.TM,'String',num2str(Told))
 end
 
-
-
+if i == n
+    dh = oldDH
+    for i = 1:n
+        L(i) = Link('d',dh(i,2), 'a', dh(i,3), 'alpha', dh(i,4));
+    end
+    R = SerialLink(L);
+    q0 = zeros(1,n)
+    R.plot(q0);
+end
 
 
 
@@ -387,26 +394,26 @@ set(handles.TM,'String',[])
 
 
 
-function LNO_Callback(hObject, eventdata, handles)
-% hObject    handle to LNO (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% function LNO_Callback(hObject, eventdata, handles)
+% % hObject    handle to LNO (see GCBO)
+% % eventdata  reserved - to be defined in a future version of MATLAB
+% % handles    structure with handles and user data (see GUIDATA)
+% 
+% % Hints: get(hObject,'String') returns contents of LNO as text
+% %        str2double(get(hObject,'String')) returns contents of LNO as a double
 
-% Hints: get(hObject,'String') returns contents of LNO as text
-%        str2double(get(hObject,'String')) returns contents of LNO as a double
 
-
-% --- Executes during object creation, after setting all properties.
-function LNO_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to LNO (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
+% % --- Executes during object creation, after setting all properties.
+% function LNO_CreateFcn(hObject, eventdata, handles)
+% % hObject    handle to LNO (see GCBO)
+% % eventdata  reserved - to be defined in a future version of MATLAB
+% % handles    empty - handles not created until after all CreateFcns called
+% 
+% % Hint: edit controls usually have a white background on Windows.
+% %       See ISPC and COMPUTER.
+% if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+%     set(hObject,'BackgroundColor','white');
+% end
 
 
 % --- Executes during object creation, after setting all properties.

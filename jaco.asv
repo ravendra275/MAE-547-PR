@@ -106,7 +106,7 @@ R = SerialLink(m);
 % end
 jsingu(J);
 
-fprintf('Do you want to find if a particular pose is close to singularity?\nPress y for yes and n for no \n');
+fprintf('Do you want to find if a particular pose is close to s?\nPress y for yes and n for no \n');
 pose=input('y or n: ','s');
 if xor(strcmp(pose,'y'),strcmp(pose,'n')) == 0
     fprintf('Invalid input. Press y for yes, Press n for no\n');
@@ -118,6 +118,8 @@ if pose~='n'
         jtconfig(i)=input(' ');
     end
     singularity= R.maniplty(jtconfig)
-    fprintf('If this values is close to 0 (generally if the order is higher than 10e-3) then\n the given pose is close to singularity'); 
+    if 
 end
+
     
+fprintf();

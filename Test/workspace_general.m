@@ -21,9 +21,12 @@ for i=1:x
     a(i)=input('');
 end
 d=zeros(1,x);
+
 for i=1:x
-    fprintf('Enter d(%d):',i);
-    d(i)=input('');
+    if por(i)~='p'
+        fprintf('Enter d(%d):',i);
+        d(i)=input('');
+    end
 end
 q=zeros(x,2);
 for i=1:x
@@ -43,6 +46,13 @@ for i=1:x
 end
 lno=[1:x];
 th=zeros(1,x);
+
+for i=1:x
+    if por(i)=='p'
+        fprintf('Enter theta %d ',i);
+        th(i)=input('');
+    end
+end
 DH= [th; d; a; alpha]'
 %  DH=array2table(DH,...
 %      'VariableNames',{'Link no.','q','d','a','alpha'})
@@ -71,7 +81,7 @@ for i=1:x
     if por(i)=='r'
         t(:,i)=linspace( rad2deg(q(i,1)),rad2deg(q(i,2)),90);
     elseif por(i)=='p'
-        t(:,i)=linspace(q(i,1),q(i,2),40);
+        t(:,i)=linspace(q(i,1),q(i,2),90);
     end
     %T{i}=ndgrid(t{i});
 end
@@ -114,9 +124,13 @@ w=zeros(10000,x);
 %         m1=m1+1;
 %     end
 % end
-% m=[1 1 1 0 0 0];
-
-w=R.jtraj(T1, t2, 10000)
+ m=[1 0 0 1 1 1];
+%q12=R.ikunc(T1,T0i2{2}(1:4,4)')
+if x>=6
+    w=R.jtraj(T1, t2, 10000);
+else
+    w=R.jtraj(T1,t2,10000,R.ikine(T1,T0i2{2}(1:4,4)',m','pinv'));
+end
     
 q_f1=R.fkine(w);
 
@@ -130,13 +144,22 @@ y_traj(1,i) = q_f1(2,4,i);
 z_traj(1,i) = q_f1(3,4,i);
 end
 
+figure(1)
+workspx=reshape(x_traj(1,:),[2000,5]);
+workspy=reshape(y_traj(1,:),[2000,5]);
+workspz=reshape(z_traj(1,:),[2000,5]);
+surf(workspx(:,:),workspy(:,:),workspz(:,:));
+figure(2)
 hold on
+
 for i=1:10000
-R.plot([w(i,:)],'delay',1e-200);
+%R.plot([w(i,:)],'fps',200);
 [x,y,z] = sphere(16);
 plot3(x_traj(1,i),y_traj(1,i),z_traj(1,i),'.');
 hold on;
 end
+hold on;
+
 % 
 % subs q1;
 % subs d1;
@@ -187,10 +210,12 @@ end
 
 
 
-% vstup=0;
-% while (vstup ~= 1)
-% R.plot(w)
-% end
+vstup=0;
+while (vstup ~= 1)
+R.plot(w,'delay',1e-20)
+end
+hold off;
+
 
 
 

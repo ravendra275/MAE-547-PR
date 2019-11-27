@@ -86,8 +86,8 @@ function C = coriolis(robot, q, qd)
         Csq(N,N) = sym();
     else
         
-        C = zeros(N,N);
-        Csq = zeros(N,N);
+        C = sym(zeros(N,N));
+        Csq = sym(zeros(N,N));
     end
 
 

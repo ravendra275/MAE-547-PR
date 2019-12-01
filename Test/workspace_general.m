@@ -149,9 +149,9 @@ workspx=reshape(x_traj(1,:),[2000,5]);
 workspy=reshape(y_traj(1,:),[2000,5]);
 workspz=reshape(z_traj(1,:),[2000,5]);
 surf(workspx(:,:),workspy(:,:),workspz(:,:));
+
 figure(2)
 hold on
-
 for i=1:10000
 %R.plot([w(i,:)],'fps',200);
 [x,y,z] = sphere(16);

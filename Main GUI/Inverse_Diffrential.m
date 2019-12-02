@@ -1,9 +1,10 @@
 function [q_dot] = Inverse_Diffrential(n, temp, DH, low, high, Vx, Vy, Vz, Wx, Wy, Wz,q0)
 
 Number_of_Links = n;
+q0 = q0';
 disp(DH)
 for k = 1:Number_of_Links
- if temp(:,k) == 3
+ if temp(:,k) == 114
     L{k} = Link('d',DH(k,2), 'a', DH(k,3), 'alpha', DH(k,4));
  else
     disp(' As entered link is prismatic please enter its joint limits ')

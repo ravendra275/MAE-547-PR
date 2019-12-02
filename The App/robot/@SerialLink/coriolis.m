@@ -82,12 +82,12 @@ function C = coriolis(robot, q, qd)
     N = robot2.n;
     
     if isa(q, 'sym')
-        C(N,N) = sym();
-        Csq(N,N) = sym();
+        C = sym(zeros(N,N)); %Laukik changed these lines. There was a syntactical error earlier
+        Csq = sym(zeros(N,N));
     else
         
-        C = zeros(N,N);
-        Csq = zeros(N,N);
+        C = (zeros(N,N));
+        Csq = (zeros(N,N));
     end
 
 

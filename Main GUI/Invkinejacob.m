@@ -21,6 +21,9 @@ n = 1:Number_of_Links;
 m =[X(n)];
 R = SerialLink(m)
 disp(' ')
+Px = Vx;
+Py = Vy;
+Pz = Vz;
 V = [Px; Py; Pz]
 Jaco = R.jacob0(q0,'trans')
 Q = pinv(Jaco)*V 

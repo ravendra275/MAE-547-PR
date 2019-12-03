@@ -65,7 +65,7 @@ for i=1:x
         %limitlow(i)   = input(' Lower limit for the joint - ');
         %limitupper(i) = input(' Upper limit for the joint - ');
         L{i}=Link('theta',DH(i,1),'a',DH(i,3),'alpha',DH(i,4));
-        %L{i}.qlim = [limitlow(i), limitupper(i)];
+        L{i}.qlim = [limitlow(i), limitupper(i)];
     end
 end
 
@@ -175,7 +175,6 @@ if x<6
     
     figure(1);
     N=30;
-    J = R.fkine(t);  
     for i= 0:N
         for j= 1:N+1
             TR= J(:,4,i*(30)+j)
@@ -187,7 +186,7 @@ if x<6
     space=[0:.01:10];
     [Q QD QDD]=jtraj(q(:,1),q(:,2),space);
     % J=fkine(R, Q);
-     
+    J = R.fkine(t);    
     figure(2);
     for x=1:1:1000
         plot3(J(1,4,x),J(2,4,x),J(3,4,x),'b.')

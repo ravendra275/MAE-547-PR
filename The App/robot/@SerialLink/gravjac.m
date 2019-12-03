@@ -47,7 +47,7 @@
 %
 
 function [tauB, J] = gravjac(robot, q, grav)
-    
+    %keyboard();
     n = robot.n;
     revolute = [robot.links(:).isrevolute];
     if ~robot.mdh
@@ -71,8 +71,13 @@ function [tauB, J] = gravjac(robot, q, grav)
     for joint = 1: n
         r(:,joint) = [robot.links(joint).r'; 1];
     end
-    com_arr = zeros(3, n);
     
+    if(~ isa(q,'sym'))
+        com_arr = zeros(3, n);
+    else
+        com_arr = sym(zeros(3, n));
+    end
+        
     for pose = 1: poses
         
         [Te, T] = robot.fkine(q(pose,:));
@@ -87,6 +92,7 @@ function [tauB, J] = gravjac(robot, q, grav)
         
         % Backwards recursion
         for joint = n: -1: 1
+            
             
             com = T(:,:,joint) * r(:,joint); % C.o.M. in world frame, homog
             com_arr(:,joint) = com(1:3); % Add it to the distal others

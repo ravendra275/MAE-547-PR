@@ -1,6 +1,6 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
   <configuration file="C:\Users\raven\Documents\GitHub\MAE-547-PR\The App\MainWindow.prj" location="C:\Users\raven\Documents\GitHub\MAE-547-PR\The App" name="MainWindow" target="target.ezdeploy.standalone" target-name="Application Compiler">
-    <param.appname>Main_Window</param.appname>
+    <param.appname>MAE547PROJECT</param.appname>
     <param.icon />
     <param.icons />
     <param.version>1.0</param.version>
@@ -11,7 +11,7 @@
     <param.description />
     <param.screenshot />
     <param.guid />
-    <param.installpath.string>\Main_Window\</param.installpath.string>
+    <param.installpath.string>\MAE547PROJECT\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
     <param.logo />
     <param.install.notes />
@@ -80,9 +80,152 @@
     <fileset.main>
       <file>${PROJECT_ROOT}\Main_Window.mlapp</file>
     </fileset.main>
-    <fileset.resources />
+    <fileset.resources>
+      <file>${PROJECT_ROOT}\common</file>
+      <file>${PROJECT_ROOT}\contrib</file>
+      <file>${PROJECT_ROOT}\robot</file>
+      <file>${PROJECT_ROOT}\robot\angvec2r.m</file>
+      <file>${PROJECT_ROOT}\robot\angvec2tr.m</file>
+      <file>${PROJECT_ROOT}\robot\Bug2.m</file>
+      <file>${PROJECT_ROOT}\robot\CHANGES</file>
+      <file>${PROJECT_ROOT}\robot\CITATION</file>
+      <file>${PROJECT_ROOT}\robot\Contents.m</file>
+      <file>${PROJECT_ROOT}\robot\CONTRIB</file>
+      <file>${PROJECT_ROOT}\robot\ctraj.m</file>
+      <file>${PROJECT_ROOT}\robot\delta2tr.m</file>
+      <file>${PROJECT_ROOT}\robot\DH.jar</file>
+      <file>${PROJECT_ROOT}\robot\DHFactor.java</file>
+      <file>${PROJECT_ROOT}\robot\DHFactor.m</file>
+      <file>${PROJECT_ROOT}\robot\distancexform.m</file>
+      <file>${PROJECT_ROOT}\robot\Dstar.m</file>
+      <file>${PROJECT_ROOT}\robot\DXform.m</file>
+      <file>${PROJECT_ROOT}\robot\EKF.m</file>
+      <file>${PROJECT_ROOT}\robot\eul2jac.m</file>
+      <file>${PROJECT_ROOT}\robot\eul2r.m</file>
+      <file>${PROJECT_ROOT}\robot\eul2tr.m</file>
+      <file>${PROJECT_ROOT}\robot\info.xml</file>
+      <file>${PROJECT_ROOT}\robot\joy2tr.m</file>
+      <file>${PROJECT_ROOT}\robot\joystick.m</file>
+      <file>${PROJECT_ROOT}\robot\jsingu.m</file>
+      <file>${PROJECT_ROOT}\robot\jtraj.m</file>
+      <file>${PROJECT_ROOT}\robot\LGPL-LICENCE.txt</file>
+      <file>${PROJECT_ROOT}\robot\Link.m</file>
+      <file>${PROJECT_ROOT}\robot\lspb.m</file>
+      <file>${PROJECT_ROOT}\robot\makemap.m</file>
+      <file>${PROJECT_ROOT}\robot\Map.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_3link3d.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_ball.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_baxter.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_coil.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_Fanuc10L.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_hyper2d.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_hyper3d.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_irb140.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_irb140_mdh.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_jaco.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_KR5.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_m16.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_mico.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_MotomanHP6.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_nao.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_offset3.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_offset6.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_onelink.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_p8.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_phantomx.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_planar1.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_planar2.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_planar3.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_puma560.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_puma560akb.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_quadrotor.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_S4ABB2p8.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_simple6.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_stanford.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_stanford_mdh.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_twolink.m</file>
+      <file>${PROJECT_ROOT}\robot\mdl_twolink_mdh.m</file>
+      <file>${PROJECT_ROOT}\robot\mstraj.m</file>
+      <file>${PROJECT_ROOT}\robot\mtraj.m</file>
+      <file>${PROJECT_ROOT}\robot\Navigation.m</file>
+      <file>${PROJECT_ROOT}\robot\oa2r.m</file>
+      <file>${PROJECT_ROOT}\robot\oa2tr.m</file>
+      <file>${PROJECT_ROOT}\robot\ParticleFilter.m</file>
+      <file>${PROJECT_ROOT}\robot\plot_vehicle.m</file>
+      <file>${PROJECT_ROOT}\robot\plotbotopt.m</file>
+      <file>${PROJECT_ROOT}\robot\Prismatic.m</file>
+      <file>${PROJECT_ROOT}\robot\PrismaticMDH.m</file>
+      <file>${PROJECT_ROOT}\robot\PRM.m</file>
+      <file>${PROJECT_ROOT}\robot\qplot.m</file>
+      <file>${PROJECT_ROOT}\robot\Quaternion.m</file>
+      <file>${PROJECT_ROOT}\robot\r2t.m</file>
+      <file>${PROJECT_ROOT}\robot\RandomPath.m</file>
+      <file>${PROJECT_ROOT}\robot\RangeBearingSensor.m</file>
+      <file>${PROJECT_ROOT}\robot\README</file>
+      <file>${PROJECT_ROOT}\robot\RELEASE</file>
+      <file>${PROJECT_ROOT}\robot\Revolute.m</file>
+      <file>${PROJECT_ROOT}\robot\RevoluteMDH.m</file>
+      <file>${PROJECT_ROOT}\robot\robot.pdf</file>
+      <file>${PROJECT_ROOT}\robot\RobotArm.m</file>
+      <file>${PROJECT_ROOT}\robot\rot2.m</file>
+      <file>${PROJECT_ROOT}\robot\rotx.m</file>
+      <file>${PROJECT_ROOT}\robot\roty.m</file>
+      <file>${PROJECT_ROOT}\robot\rotz.m</file>
+      <file>${PROJECT_ROOT}\robot\rpy2jac.m</file>
+      <file>${PROJECT_ROOT}\robot\rpy2r.m</file>
+      <file>${PROJECT_ROOT}\robot\rpy2tr.m</file>
+      <file>${PROJECT_ROOT}\robot\RRT.m</file>
+      <file>${PROJECT_ROOT}\robot\rt2tr.m</file>
+      <file>${PROJECT_ROOT}\robot\rtbdemo.m</file>
+      <file>${PROJECT_ROOT}\robot\rtbdemo_gui.fig</file>
+      <file>${PROJECT_ROOT}\robot\se2.m</file>
+      <file>${PROJECT_ROOT}\robot\se3.m</file>
+      <file>${PROJECT_ROOT}\robot\Sensor.m</file>
+      <file>${PROJECT_ROOT}\robot\skew.m</file>
+      <file>${PROJECT_ROOT}\robot\startup_rtb.m</file>
+      <file>${PROJECT_ROOT}\robot\t2r.m</file>
+      <file>${PROJECT_ROOT}\robot\tpoly.m</file>
+      <file>${PROJECT_ROOT}\robot\tr2angvec.m</file>
+      <file>${PROJECT_ROOT}\robot\tr2delta.m</file>
+      <file>${PROJECT_ROOT}\robot\tr2eul.m</file>
+      <file>${PROJECT_ROOT}\robot\tr2jac.m</file>
+      <file>${PROJECT_ROOT}\robot\tr2rpy.m</file>
+      <file>${PROJECT_ROOT}\robot\tr2rt.m</file>
+      <file>${PROJECT_ROOT}\robot\tranimate.m</file>
+      <file>${PROJECT_ROOT}\robot\transl.m</file>
+      <file>${PROJECT_ROOT}\robot\transl2.m</file>
+      <file>${PROJECT_ROOT}\robot\trchain.m</file>
+      <file>${PROJECT_ROOT}\robot\trchain2.m</file>
+      <file>${PROJECT_ROOT}\robot\trinterp.m</file>
+      <file>${PROJECT_ROOT}\robot\tripleangle.fig</file>
+      <file>${PROJECT_ROOT}\robot\tripleangle.m</file>
+      <file>${PROJECT_ROOT}\robot\trnorm.m</file>
+      <file>${PROJECT_ROOT}\robot\trot2.m</file>
+      <file>${PROJECT_ROOT}\robot\trotx.m</file>
+      <file>${PROJECT_ROOT}\robot\troty.m</file>
+      <file>${PROJECT_ROOT}\robot\trotz.m</file>
+      <file>${PROJECT_ROOT}\robot\trplot.m</file>
+      <file>${PROJECT_ROOT}\robot\trplot2.m</file>
+      <file>${PROJECT_ROOT}\robot\trprint.m</file>
+      <file>${PROJECT_ROOT}\robot\trscale.m</file>
+      <file>${PROJECT_ROOT}\robot\unit.m</file>
+      <file>${PROJECT_ROOT}\robot\Vehicle.m</file>
+      <file>${PROJECT_ROOT}\robot\vex.m</file>
+      <file>${PROJECT_ROOT}\robot\wtrans.m</file>
+      <file>${PROJECT_ROOT}\simulink</file>
+      <file>${PROJECT_ROOT}\startup_rvc.m</file>
+    </fileset.resources>
     <fileset.package />
     <fileset.depfun>
+      <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\contrib\pHRIWARE\@SerialLinked\collisions.m</file>
+      <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\contrib\pHRIWARE\@SerialLinked\grav.m</file>
+      <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\contrib\pHRIWARE\@SerialLinked\gravload.m</file>
+      <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\contrib\pHRIWARE\@SerialLinked\ikcon.m</file>
+      <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\contrib\pHRIWARE\@SerialLinked\ikunc.m</file>
+      <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\contrib\pHRIWARE\@SerialLinked\pay.m</file>
+      <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\contrib\pHRIWARE\@SerialLinked\paycap.m</file>
+      <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\contrib\pHRIWARE\@SerialLinked\qmincon.m</file>
+      <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\contrib\pHRIWARE\@SerialLinked\SerialLinked.m</file>
       <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\robot\@SerialLink\accel.m</file>
       <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\robot\@SerialLink\animate.m</file>
       <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\robot\@SerialLink\cinertia.m</file>
@@ -126,23 +269,11 @@
       <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\robot\@SerialLink\teach.m</file>
       <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\robot\@SerialLink\trchain.m</file>
       <file>C:\Users\raven\Documents\GitHub\MAE-547-PR\Main GUI\robot\@SerialLink\vellipse.m</file>
-      <file>${PROJECT_ROOT}\common\about.m</file>
-      <file>${PROJECT_ROOT}\common\arrow3.m</file>
-      <file>${PROJECT_ROOT}\common\colnorm.m</file>
-      <file>${PROJECT_ROOT}\common\colorname.m</file>
-      <file>${PROJECT_ROOT}\common\ishomog.m</file>
-      <file>${PROJECT_ROOT}\common\isrot.m</file>
-      <file>${PROJECT_ROOT}\common\isvec.m</file>
-      <file>${PROJECT_ROOT}\common\numcols.m</file>
-      <file>${PROJECT_ROOT}\common\numrows.m</file>
-      <file>${PROJECT_ROOT}\common\plot2.m</file>
-      <file>${PROJECT_ROOT}\common\plot_ellipse.m</file>
-      <file>${PROJECT_ROOT}\common\tb_optparse.m</file>
-      <file>${PROJECT_ROOT}\contrib\pHRIWARE\pHRIWARE.m</file>
-      <file>${PROJECT_ROOT}\contrib\pHRIWARE\VER.txt</file>
       <file>${PROJECT_ROOT}\Description_of_Frame_final.mlapp</file>
       <file>${PROJECT_ROOT}\Differnetial_Kinematics_Numercial.mlapp</file>
       <file>${PROJECT_ROOT}\Differnetial_Kinematics_Numercial_noDH.mlapp</file>
+      <file>${PROJECT_ROOT}\Euler_angle.mlapp</file>
+      <file>${PROJECT_ROOT}\fdyn.mlapp</file>
       <file>${PROJECT_ROOT}\Forward_Kinematics.mlapp</file>
       <file>${PROJECT_ROOT}\Forward_Kinematics_noDH.mlapp</file>
       <file>${PROJECT_ROOT}\Inverse_Diffrential.m</file>
@@ -205,26 +336,34 @@
       <file>${PROJECT_ROOT}\robot\mex\frne.mexw64</file>
       <file>${PROJECT_ROOT}\robot\plotbotopt.m</file>
       <file>${PROJECT_ROOT}\robot\r2t.m</file>
+      <file>${PROJECT_ROOT}\robot\RELEASE</file>
       <file>${PROJECT_ROOT}\robot\Revolute.m</file>
       <file>${PROJECT_ROOT}\robot\rotx.m</file>
       <file>${PROJECT_ROOT}\robot\roty.m</file>
       <file>${PROJECT_ROOT}\robot\rotz.m</file>
       <file>${PROJECT_ROOT}\robot\rpy2jac.m</file>
       <file>${PROJECT_ROOT}\robot\rt2tr.m</file>
+      <file>${PROJECT_ROOT}\robot\se2.m</file>
+      <file>${PROJECT_ROOT}\robot\startup_rtb.m</file>
       <file>${PROJECT_ROOT}\robot\t2r.m</file>
       <file>${PROJECT_ROOT}\robot\tr2angvec.m</file>
       <file>${PROJECT_ROOT}\robot\tr2eul.m</file>
       <file>${PROJECT_ROOT}\robot\tr2rpy.m</file>
       <file>${PROJECT_ROOT}\robot\transl.m</file>
       <file>${PROJECT_ROOT}\robot\trotx.m</file>
+      <file>${PROJECT_ROOT}\robot\troty.m</file>
+      <file>${PROJECT_ROOT}\robot\trotz.m</file>
       <file>${PROJECT_ROOT}\robot\trplot.m</file>
       <file>${PROJECT_ROOT}\Rotation_matrix_final.mlapp</file>
       <file>${PROJECT_ROOT}\Transform_mapping_final.mlapp</file>
       <file>${PROJECT_ROOT}\Transform_operator_final.mlapp</file>
+      <file>${PROJECT_ROOT}\Workout.m</file>
+      <file>${PROJECT_ROOT}\workspace1.mlapp</file>
+      <file>${PROJECT_ROOT}\workspace1_noDH.mlapp</file>
     </fileset.depfun>
     <build-deliverables>
       <file location="${PROJECT_ROOT}\MainWindow\for_testing" name="splash.png" optional="false">C:\Users\raven\Documents\GitHub\MAE-547-PR\The App\MainWindow\for_testing\splash.png</file>
-      <file location="${PROJECT_ROOT}\MainWindow\for_testing" name="Main_Window.exe" optional="false">C:\Users\raven\Documents\GitHub\MAE-547-PR\The App\MainWindow\for_testing\Main_Window.exe</file>
+      <file location="${PROJECT_ROOT}\MainWindow\for_testing" name="MAE547PROJECT.exe" optional="false">C:\Users\raven\Documents\GitHub\MAE-547-PR\The App\MainWindow\for_testing\MAE547PROJECT.exe</file>
       <file location="${PROJECT_ROOT}\MainWindow\for_testing" name="readme.txt" optional="true">C:\Users\raven\Documents\GitHub\MAE-547-PR\The App\MainWindow\for_testing\readme.txt</file>
     </build-deliverables>
     <workflow />

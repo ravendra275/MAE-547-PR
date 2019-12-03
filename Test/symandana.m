@@ -223,5 +223,3 @@ end
 
 fprintf('These columns numbers are dependent');
 disp(depcol);
-
-%>>>>>>> fecb51ffc98b1d8c4d44137fd79b0f559046c4c1

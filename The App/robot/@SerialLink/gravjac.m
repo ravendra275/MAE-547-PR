@@ -56,7 +56,7 @@ function [tauB, J] = gravjac(robot, q, grav)
     end
     
     poses = size(q, 1);
-    tauB = zeros(poses, n);
+    
     if nargout == 2, J = zeros(6, robot.n, poses); end
     
     % Forces
@@ -72,10 +72,13 @@ function [tauB, J] = gravjac(robot, q, grav)
         r(:,joint) = [robot.links(joint).r'; 1];
     end
     
+    %keyboard()
     if(~ isa(q,'sym'))
         com_arr = zeros(3, n);
+        tauB = zeros(poses, n);
     else
         com_arr = sym(zeros(3, n));
+        tauB = sym(zeros(poses, n));
     end
         
     for pose = 1: poses

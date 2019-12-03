@@ -75,7 +75,8 @@
 
 
 function varargout = rne(robot, varargin)
-
+    
+    robot.fast=0; %Added by Laukik
     if robot.fast && ~robot.issym()
         % use the MEX-file implementation
         [varargout{1:nargout}] = frne(robot, varargin{:});

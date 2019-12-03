@@ -98,6 +98,7 @@ function C = coriolis(robot, q, qd)
     for j=1:N
         QD = zeros(1,N);
         QD(j) = 1;
+        
         tau = robot2.rne(q, QD, zeros(size(q)), [0 0 0]');
         Csq(:,j) = Csq(:,j) + tau.';
     end

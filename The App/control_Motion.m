@@ -1,10 +1,13 @@
-% Script for compliance control
+
+% Assumes you already have an R, a 2 link planar robot
+%Input initial q0 and qd0
+
 
 R.fast=0;
-xd=[0;2];
+xd=[.7;.9];
 
 %Inputs
-q0=[pi/6 0];
+q0=[0 pi/6];
 qt=q0;
 x0=R.fkine(q0);
 
@@ -14,9 +17,6 @@ x0=x0(1:2,end);
 %User inputs
 qd0=[0 0];
 qdt=qd0;
-
-%User inputs
-he=[0 20];
 
 %User inputs. Default values are one each
 kp=10;
@@ -29,7 +29,6 @@ dt=0.01;
 n_steps=floor(tf/dt);
 
 for i=1:n_steps
-
     %keyboard();
     J=R.jacob0(qt(i,:));
     J=J(1:2,1:2);
@@ -42,7 +41,7 @@ for i=1:n_steps
     
     xdt=J*qdt(i,:)';
     
-    %y=inv(J)*(-kd*xdt+kp*(xd-xt)-J_dot);
+    y=inv(J)*(-kd*xdt+kp*(xd-xt)-J_dot);
     
     future_q=qt(i,:)+qdt(i,:)*dt;
     
@@ -55,14 +54,18 @@ for i=1:n_steps
     
     n=C*qdt(i,:)'+g'; %Refer to 8.56 in the book
     
-%     keyboard()
-    u=g'+J'*kp*(xd-xt)-J'*kd*J*qdt(i,:)';
-    %he = kp*(xd-xt);
+    u=B*y+n;
+    
     
     xk(:,i)=xt;
     
     
-    qdd=pinv(B)*(u-n-J'*he'); %From the robot dynamic equation
+    qdd=inv(B)*(u-n); %From the robot dynamic equation
     qt(i+1,:)=qt(i,:)+qdt(i,:)*dt;
     qdt(i+1,:)=qdt(i,:)+qdd'*dt;
 end
+
+%qt represents joint angles
+%qdt represents joint derivatives
+    
+    

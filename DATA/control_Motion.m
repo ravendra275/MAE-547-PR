@@ -4,7 +4,7 @@
 
 
 R.fast=0;
-xd=[1;1];
+xd=[.7;.9];
 
 %Inputs
 q0=[0 pi/6];
@@ -19,11 +19,11 @@ qd0=[0 0];
 qdt=qd0;
 
 %User inputs. Default values are one each
-kp=1;
-kd=1;
+kp=10;
+kd=10;
 
 
-tf=10;
+tf=50;
 dt=0.01;
 
 n_steps=floor(tf/dt);

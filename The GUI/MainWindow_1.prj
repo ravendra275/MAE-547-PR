@@ -1,0 +1,79 @@
+<deployment-project plugin="plugin.webdeploy" plugin-version="1.0">
+  <configuration build-checksum="693335008" file="C:\Users\raven\Documents\GitHub\MAE-547-PR\The GUI\MainWindow_1.prj" location="C:\Users\raven\Documents\GitHub\MAE-547-PR\The GUI" name="MainWindow_1" target="target.webdeploy" target-name="Web App Compiler">
+    <param.appname>Robotics_Toolbox</param.appname>
+    <param.intermediate>${PROJECT_ROOT}\MainWindow_1</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\MainWindow_1</param.files.only>
+    <param.output />
+    <param.logdir>${PROJECT_ROOT}\MainWindow_1</param.logdir>
+    <param.target.type>subtarget.web.app</param.target.type>
+    <param.user.defined.mcr.options />
+    <param.support.packages />
+    <unset>
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
+      <param.target.type />
+      <param.user.defined.mcr.options />
+      <param.support.packages />
+    </unset>
+    <fileset.web.main>
+      <file>${PROJECT_ROOT}\Main_Window.mlapp</file>
+    </fileset.web.main>
+    <fileset.resources>
+      <file>${PROJECT_ROOT}\common</file>
+      <file>${PROJECT_ROOT}\contrib</file>
+      <file>${PROJECT_ROOT}\MainWindow_1</file>
+      <file>${PROJECT_ROOT}\robot</file>
+      <file>${PROJECT_ROOT}\simulink</file>
+    </fileset.resources>
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}\Description_of_Frame_final.mlapp</file>
+      <file>${PROJECT_ROOT}\Differnetial_Kinematics_Numercial.mlapp</file>
+      <file>${PROJECT_ROOT}\Differnetial_Kinematics_Numercial_noDH.mlapp</file>
+      <file>${PROJECT_ROOT}\Euler_angle.mlapp</file>
+      <file>${PROJECT_ROOT}\fdyn.mlapp</file>
+      <file>${PROJECT_ROOT}\Forward_Kinematics.mlapp</file>
+      <file>${PROJECT_ROOT}\Forward_Kinematics_noDH.mlapp</file>
+      <file>${PROJECT_ROOT}\Inverse_Diffrential.m</file>
+      <file>${PROJECT_ROOT}\Inverse_Kinematics.mlapp</file>
+      <file>${PROJECT_ROOT}\Inverse_Kinematics_Diffrential.mlapp</file>
+      <file>${PROJECT_ROOT}\Inverse_Kinematics_Diffrential_noDH.mlapp</file>
+      <file>${PROJECT_ROOT}\Inverse_Kinematics_Jac.mlapp</file>
+      <file>${PROJECT_ROOT}\Inverse_Kinematics_Jac_noDH.mlapp</file>
+      <file>${PROJECT_ROOT}\Inverse_Kinematics_noDH.mlapp</file>
+      <file>${PROJECT_ROOT}\Invkinejacob.m</file>
+      <file>${PROJECT_ROOT}\Manipulator_Control.mlapp</file>
+      <file>${PROJECT_ROOT}\Rotation_matrix_final.mlapp</file>
+      <file>${PROJECT_ROOT}\Transform_mapping_final.mlapp</file>
+      <file>${PROJECT_ROOT}\Transform_operator_final.mlapp</file>
+      <file>${PROJECT_ROOT}\Workout.m</file>
+      <file>${PROJECT_ROOT}\workspace1.mlapp</file>
+      <file>${PROJECT_ROOT}\workspace1_noDH.mlapp</file>
+    </fileset.depfun>
+    <fileset.package />
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\MainWindow_1" name="Robotics_Toolbox.ctf" optional="false">C:\Users\raven\Documents\GitHub\MAE-547-PR\The GUI\MainWindow_1\Robotics_Toolbox.ctf</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2019b</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
